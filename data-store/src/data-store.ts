@@ -19,6 +19,12 @@ export class DataStore {
    * @param _amount
    */
   getItems(_position: number, _amount: number): number[] {
-    return [];
+    let a: number[] = [];
+
+    this.collections.map(function(elemento) {
+      a = a.concat.apply(a, elemento.getItems(0, elemento.getTotal()));
+    });
+
+    return a.slice(_position, _position + _amount);
   }
 }
